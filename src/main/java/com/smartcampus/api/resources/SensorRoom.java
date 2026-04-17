@@ -7,9 +7,11 @@ package com.smartcampus.api.resources;
 import com.smartcampus.api.dao.GenericDAO;
 import com.smartcampus.api.dao.MockDataBase;
 import com.smartcampus.api.model.Room;
+import com.smartcampus.api.model.Sensor;
 import java.net.URI;
 import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -28,6 +30,7 @@ import javax.ws.rs.core.UriInfo;
 @Path("/rooms")
 public class SensorRoom {
     private GenericDAO<Room> roomsDAO= new GenericDAO<>(MockDataBase.roomList);
+    private GenericDAO<Sensor> sensorDAO= new GenericDAO<>(MockDataBase.sensorList);
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -78,6 +81,38 @@ public class SensorRoom {
         }
         
         return Response.ok(room,MediaType.APPLICATION_JSON).build();
+    }
+    
+    @DELETE
+    @Path("/{roomId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteRoom(@PathParam("roomId") String roomId){
+        Room deleteRoom= roomsDAO.getById(roomId);
+        if(deleteRoom == null){
+            return Response.status(Response.Status.NOT_FOUND).entity("Room Not Found!").build();
+        }
+        
+        if(roomsDAO.getById(roomId).getSensorIds().isEmpty()){
+            return Response.ok().entity("Empty sensor Room successfully deleted!").build();
+        }
+        boolean haveActiveSensors=false;
+            List<String> sensorList= deleteRoom.getSensorIds();
+            
+            for(String sensor:sensorList){
+                Sensor delSensor= sensorDAO.getById(sensor);
+                if(delSensor != null && "ACTIVE".equalsIgnoreCase(delSensor.getStatus())){
+                    haveActiveSensors=true;
+                    break;
+                }
+            }
+            
+            if(haveActiveSensors){
+                return Response.status(Response.Status.CONFLICT).entity("Active Sensors in this Room : Cannot Delete").build();
+            }
+            roomsDAO.delete(roomId);
+            
+            return Response.ok().entity("Room has successfully deleted!").build();
+        
     }
     
     

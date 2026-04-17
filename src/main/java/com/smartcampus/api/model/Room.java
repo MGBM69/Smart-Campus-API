@@ -61,7 +61,7 @@ public class Room implements BaseModel{
 
     @Override
     public void setId(String id) {
-        
+        this.id=id;
     }
     
 }
