@@ -41,6 +41,15 @@ public class GenericDAO<T extends BaseModel> {
 //        item.setId(maxId+1);
 //        items.add(item);
 //    }
+    public T add(T item){
+        if(getById(item.getId())!= null){
+            throw new RuntimeException("Item with this id"+item.getId()+" is already exist");
+        }
+        items.add(item);
+        return item;
+        
+    }
+    
     
     public void update(T updateItem){
         for(int i=0;i<items.size();i++){
