@@ -13,14 +13,34 @@ public class SensorReading implements BaseModel {
     private String id;
     private long timestamp;
     private double value;
+    private String sensorId;
     
     public SensorReading(){}
     
-    public SensorReading(String id, long timeStamp,double value){
+    public SensorReading(String id, long timeStamp,double value,String sensorId){
         this.id=id;
         this.timestamp=timeStamp;
         this.value=value;
+        this.sensorId=sensorId;
     }
+
+    public double getValue() {
+        return value;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public String getSensorId() {
+        return sensorId;
+    }
+
+    public void setSensorId(String sensorId) {
+        this.sensorId = sensorId;
+    }
+    
+    
 
     public long getTimestamp() {
         return timestamp;

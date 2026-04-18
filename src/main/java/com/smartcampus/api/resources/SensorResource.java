@@ -102,4 +102,10 @@ public class SensorResource {
         
     }
     
+    @Path("/{sensorId}/reading")
+    public SensorReadingResource getSensorReadingResourse(){
+        
+        return null;
+    }
+    
 }

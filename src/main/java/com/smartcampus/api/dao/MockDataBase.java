@@ -6,6 +6,7 @@ package com.smartcampus.api.dao;
 
 import com.smartcampus.api.model.Room;
 import com.smartcampus.api.model.Sensor;
+import com.smartcampus.api.model.SensorReading;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +18,8 @@ public class MockDataBase {
     public static final List<Room> roomList= new ArrayList<>();
     
     public static final List<Sensor> sensorList= new ArrayList<>();
+    
+    public static final List<SensorReading> sensorReadingList= new ArrayList<>();
     
     static{
         // Add Rooms 
