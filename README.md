@@ -80,3 +80,15 @@ On the other hand, returning full room objects (as implemented in this system) p
 The DELETE operation in this implementation is **idempotent**, meaning that performing the same DELETE request multiple times results in the same outcome. When a room is deleted successfully, it is removed from the system. If the same DELETE request is sent again for the same room, the system will no longer find the resource and will return a **404 Not Found** response.
 
 This behavior ensures that repeated DELETE requests do not cause unintended side effects or additional changes to the system state. The first request removes the resource, and subsequent requests simply confirm that the resource no longer exists. Therefore, the DELETE operation maintains idempotency while also enforcing business rules, such as preventing deletion when active sensors are present
+
+## 3.1 - Usage of ` @Consumes(MediaType.APPLICATION_JSON)`
+
+In the implemented **SensorResource** class, the `@Consumes(MediaType.APPLICATION_JSON)` annotation ensures that the POST method only accepts request bodies formatted as JSON. When a client sends data, JAX-RS uses a message body reader (such as Jackson) to automatically convert the incoming JSON into a Sensor Java object. This allows seamless integration between the client request and server-side processing, ensuring that the API can correctly interpret and validate the sensor data before storing it.
+
+If a client attempts to send data in a different format, such as text/plain or application/xml, JAX-RS will not find a suitable message body reader to process the request. As a result, the framework automatically rejects the request and returns a **415 Unsupported Media Type** response. This built-in mechanism enforces strict content negotiation, ensuring that only supported data formats are processed and preventing potential data parsing errors or inconsistencies.
+
+## 3.2 - QueryParams and PathParams Filtering
+
+In the SensorResource class, filtering is implemented using `@QueryParam("type")`, which allows the same endpoint to handle both normal and filtered requests. When the query parameter is not provided, the condition `if(type == null || type.isEmpty())` is triggered, and the method returns the full list of sensors. This represents a standard GET request (/api/v1/sensors) where all resources are retrieved. When the query parameter is provided (e.g., /api/v1/sensors?type=Temparature), the method filters the list and returns only matching temparature sensors. This design makes the endpoint flexible by supporting both general and specific queries within a single method.
+
+In contrast, a path-based approach such as /api/v1/sensors/type/Temparature would require a separate endpoint and treats the filter value as part of the resource path rather than a query condition. This reduces flexibility and makes it harder to support multiple filtering criteria. The query parameter approach is generally superior because it allows optional filtering, supports multiple parameters, and aligns with REST principles by treating filters as modifiers of a resource collection rather than defining entirely new resource paths.
