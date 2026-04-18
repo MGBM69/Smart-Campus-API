@@ -15,6 +15,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
@@ -103,9 +104,9 @@ public class SensorResource {
     }
     
     @Path("/{sensorId}/reading")
-    public SensorReadingResource getSensorReadingResourse(){
-        
-        return null;
+    public SensorReadingResource getSensorReadingResourse(@PathParam ("sensorId") String sensorId){
+        SensorReadingResource sensorReadingResource= new SensorReadingResource(sensorId);
+        return sensorReadingResource;
     }
     
 }
