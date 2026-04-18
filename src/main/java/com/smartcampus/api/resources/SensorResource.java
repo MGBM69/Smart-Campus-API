@@ -9,10 +9,14 @@ import com.smartcampus.api.dao.MockDataBase;
 import com.smartcampus.api.model.Room;
 import com.smartcampus.api.model.Sensor;
 import java.net.URI;
+import java.util.HashSet;
+import java.util.List;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -75,6 +79,26 @@ public class SensorResource {
             
         
         
+        
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getRequestedSensor(@QueryParam("type") String type){
+        List<Sensor> sensorList=sensorDAO.getAll();
+        if(type == null || type.isEmpty()){
+            return Response.ok(sensorList).build();
+        }
+        
+        HashSet<Sensor> sameTypeSensors= new HashSet<>(); //Because of one Sensor should add one time hashset stores unique values only
+        for(int i=0;i<sensorList.size();i++){
+            String sensorType=sensorList.get(i).getType();
+            if(type.equalsIgnoreCase(sensorType)){
+                sameTypeSensors.add(sensorList.get(i));
+            }
+        }
+        
+        return Response.ok(sameTypeSensors).build();
         
     }
     
