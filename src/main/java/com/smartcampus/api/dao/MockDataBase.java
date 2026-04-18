@@ -40,5 +40,7 @@ public class MockDataBase {
         cafe.getSensorIds().add(T003.getId());
         
         roomList.add(cafe);
+        
+        //Excisting Sensors T001- 'LAB-102',  T002- 'CAF-106', T003-'CAF-106'
     }
 }
