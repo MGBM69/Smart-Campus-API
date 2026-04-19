@@ -43,7 +43,37 @@ public class MockDataBase {
         cafe.getSensorIds().add(T003.getId());
         
         roomList.add(cafe);
+        //http://localhost:8080/Smart-Campus-API/api/v1/sensors?type=Temparature get same type aka "Temparature" sensors using query parameter(GET Request)
+        //http://localhost:8080/Smart-Campus-API/api/v1/sensors create sensor and add to specific room (POST Request)
         
-        //Excisting Sensors T001- 'LAB-102',  T002- 'CAF-106', T003-'CAF-106'
+        //Excisting Sensors T001- 'LAB-102',  T002- 'CAF-106', T003-'CAF-106', T004-'SRU-005', AIR001-'SRU-005'
+        
+        
+        //To check specific Sensor reading 
+        Room SRU= new Room("SRU-005","Student Relation Unit",10);
+        Sensor Air001= new Sensor("AIR-001","Air Quality","ACTIVE",7,"SRU-005");
+        Sensor T004= new Sensor("TEMP-004","Temparature","ACTIVE",19,"SRU-005");
+        sensorList.add(Air001);
+        sensorList.add(T004);
+        
+        SRU.getSensorIds().add(Air001.getId());
+        SRU.getSensorIds().add(T004.getId());
+        
+        //make time differance for sensor reading
+        long currentTime  = System.currentTimeMillis();
+        long oneHourAgo   = currentTime - (60 * 60 * 1000);
+        
+        SensorReading airreading1= new SensorReading("R001",oneHourAgo,8,"AIR-001");
+        SensorReading airreading2= new SensorReading("R002",currentTime,9,"AIR-001");
+        
+        SensorReading tempreading= new SensorReading("R003",currentTime,24,"TEMP-004");
+        
+        sensorReadingList.add(tempreading);
+        sensorReadingList.add(airreading1);
+        sensorReadingList.add(airreading2);
+        
+        //http://localhost:8080/Smart-Campus-API/api/v1/sensors/AIR-001/reading sensor readings output (GET Request)
+        //http://localhost:8080/Smart-Campus-API/api/v1/sensors/TEMP-005/reading sensor not found output(GET Request)
+        
     }
 }
