@@ -12,6 +12,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -72,6 +73,8 @@ public class SensorReadingResource {
         if(reading==null){
             return Response.status(Response.Status.BAD_REQUEST).entity("Atleast Sensor Reading is Required!").build();
         }
+        //No need to add id for Sensor reading
+        reading.setId(UUID.randomUUID().toString());
         reading.setSensorId(sensorId); //user no need to add sensorId as json response it is coming from URL
         if(reading.getTimestamp()==0){
             reading.setTimestamp(System.currentTimeMillis());// if time is not set it will set auto matically!

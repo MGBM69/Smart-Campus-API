@@ -74,6 +74,7 @@ public class MockDataBase {
         
         //http://localhost:8080/Smart-Campus-API/api/v1/sensors/AIR-001/reading sensor readings output (GET Request)
         //http://localhost:8080/Smart-Campus-API/api/v1/sensors/TEMP-005/reading sensor not found output(GET Request)
+        //http://localhost:8080/Smart-Campus-API/api/v1/sensors/AIR-001/reading create sensor reading for specific sensor (POST Request)
         
     }
 }
