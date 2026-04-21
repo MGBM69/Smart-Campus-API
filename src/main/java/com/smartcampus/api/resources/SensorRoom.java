@@ -6,6 +6,7 @@ package com.smartcampus.api.resources;
 
 import com.smartcampus.api.dao.GenericDAO;
 import com.smartcampus.api.dao.MockDataBase;
+import com.smartcampus.api.exception.RoomNotEmptyException;
 import com.smartcampus.api.model.Room;
 import com.smartcampus.api.model.Sensor;
 import java.net.URI;
@@ -107,7 +108,7 @@ public class SensorRoom {
             }
             
             if(haveActiveSensors){
-                return Response.status(Response.Status.CONFLICT).entity("Active Sensors in this Room : Cannot Delete").build();
+                throw new RoomNotEmptyException("Room has active sensors cannot delete room");
             }
             roomsDAO.delete(roomId);
             
