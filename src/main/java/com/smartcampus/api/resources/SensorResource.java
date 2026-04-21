@@ -6,6 +6,7 @@ package com.smartcampus.api.resources;
 
 import com.smartcampus.api.dao.GenericDAO;
 import com.smartcampus.api.dao.MockDataBase;
+import com.smartcampus.api.exception.LinkedResourceNotFoundException;
 import com.smartcampus.api.model.Room;
 import com.smartcampus.api.model.Sensor;
 import java.net.URI;
@@ -45,7 +46,7 @@ public class SensorResource {
         Room room = roomsDAO.getById(sensor.getRoomId());
         // Check Sensor is null
         if(room == null){
-            return Response.status(Response.Status.NOT_FOUND).entity("Room not found where you are trying to add new sensor!").build();
+            throw new LinkedResourceNotFoundException("Room not found where you are trying to add new sensor!");
         }
         
 //        boolean excistingRoom=false;
