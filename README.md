@@ -55,6 +55,22 @@ http://localhost:8080/Smart-Campus-API/api/v1
 
 ```
 
+## Full Endpoint Reference
+
+| Method |               Endpoint                | Description                                        | Success Code |
+| :----- | :-----------------------------------: | :------------------------------------------------- | :----------: |
+| GET    |               `/api/v1`               | HATEOAS discovery endpoint                         |     200      |
+| GET    |            `/api/v1/rooms`            | Retrieve all rooms                                 |     200      |
+| POST   |            `/api/v1/rooms`            | Create a new room                                  |     201      |
+| GET    |       `/api/v1/rooms/{roomId}`        | Get a specific room by ID                          |     200      |
+| DELETE |       `/api/v1/rooms/{roomId}`        | Delete a room (blocked if ACTIVE sensors assigned) |     200      |
+| GET    |           `/api/v1/sensors`           | Retrieve all sensors                               |     200      |
+| GET    |     `/api/v1/sensors?type={type}`     | Filter sensors by type                             |     200      |
+| POST   |           `/api/v1/sensors`           | Register a new sensor (validates roomId)           |     201      |
+| GET    |     `/api/v1/sensors/{sensorId}`      | Get a specific sensor by ID                        |     200      |
+| GET    | `/api/v1/sensors/{sensorId}/readings` | Get all readings for a specific sensor             |     200      |
+| POST   | `/api/v1/sensors/{sensorId}/readings` | Add a new reading (updates sensor currentValue)    |     201      |
+
 # Report - Question Answers
 
 ## Part 1.1 - JAX-RS Resource Lifecycle
