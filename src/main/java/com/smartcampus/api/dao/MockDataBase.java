@@ -75,6 +75,7 @@ public class MockDataBase {
         //http://localhost:8080/Smart-Campus-API/api/v1/sensors/AIR-001/reading sensor readings output (GET Request)
         //http://localhost:8080/Smart-Campus-API/api/v1/sensors/TEMP-005/reading sensor not found output(GET Request)
         //http://localhost:8080/Smart-Campus-API/api/v1/sensors/AIR-001/reading create sensor reading for specific sensor (POST Request)
+        //http://localhost:8080/Smart-Campus-API/api/v1/rooms/LAB-102 check 409 exception (@DELETE method ) deleting room with active Sensors.
         
     }
 }
