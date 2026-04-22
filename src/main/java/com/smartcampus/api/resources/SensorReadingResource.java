@@ -6,6 +6,7 @@ package com.smartcampus.api.resources;
 
 import com.smartcampus.api.dao.GenericDAO;
 import com.smartcampus.api.dao.MockDataBase;
+import com.smartcampus.api.exception.SensorUnavailableException;
 import com.smartcampus.api.model.Sensor;
 import com.smartcampus.api.model.SensorReading;
 import java.net.URI;
@@ -72,6 +73,9 @@ public class SensorReadingResource {
         }
         if(reading==null){
             return Response.status(Response.Status.BAD_REQUEST).entity("Atleast Sensor Reading is Required!").build();
+        }
+        if (sensor != null && "MAINTENANCE".equalsIgnoreCase(sensor.getStatus())) {
+             throw new SensorUnavailableException( "Sensor is under maintenance and cannot accept new readings");
         }
         //No need to add id for Sensor reading
         reading.setId(UUID.randomUUID().toString());
