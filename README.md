@@ -2,9 +2,11 @@
 
 ## Smart Campus Sensor & Room Management API
 
-**Module**: 5COSC022W Client-Server Architectures
-**Author**: Banuka Malshan
-**GitHub**: [Repository](https://github.com/MGBM69/Smart-Campus-API)
+- **Module**: 5COSC022W Client-Server Architectures
+- **Author**: Banuka Malshan
+- **UOW ID**: w2051537
+- **IIT ID**: 20230174
+- **GitHub**: [Repository](https://github.com/MGBM69/Smart-Campus-API)
 
 ## Overview
 
@@ -53,6 +55,55 @@ The server will start on port 8080.
 ```
 http://localhost:8080/Smart-Campus-API/api/v1
 
+```
+
+### How to Build and Run Your Own PC
+
+- Install JDK 8+
+- Install Apache Tomcat
+- Clone/download repository
+- Build project using Maven
+- Deploy WAR file to Tomcat
+- Start server and access API
+
+## Project Structure
+
+```
+Smart-Campus-API/
+├── Web Pages/
+│   ├── META-INF/
+│   ├── WEB-INF/
+│   └── index.html
+├── RESTful Web Services/
+├── Source Packages/
+│   ├── com.smartcampus.api/
+│   │   └── AppConfig.java
+│   ├── com.smartcampus.api.dao/
+│   │   ├── GenericDAO.java
+│   │   └── MockDataBase.java
+│   ├── com.smartcampus.api.exception/
+│   │   ├── GlobalExceptionMapper.java
+│   │   ├── LinkedResourceNotFoundException.java
+│   │   ├── LinkedResourceNotFoundExceptionMapper.java
+│   │   ├── RoomNotEmptyException.java
+│   │   ├── RoomNotEmptyExceptionMapper.java
+│   │   ├── SensorUnavailableException.java
+│   │   └── SensorUnavailableExceptionMapper.java
+│   ├── com.smartcampus.api.model/
+│   │   ├── BaseModel.java
+│   │   ├── Room.java
+│   │   ├── Sensor.java
+│   │   └── SensorReading.java
+│   └── com.smartcampus.api.resources/
+│       ├── JavaEE8Resource.java
+│       ├── SensorReadingResource.java
+│       ├── SensorResource.java
+│       └── SensorRoom.java
+├── Test Packages/
+├── Other Sources/
+├── Dependencies/
+├── Java Dependencies/
+└── Project Files/
 ```
 
 ## Full Endpoint Reference
